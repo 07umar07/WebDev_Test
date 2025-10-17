@@ -1,0 +1,330 @@
+/* === 1. RESET DASAR & PENGATURAN GLOBAL === */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* === 2. HEADER NAVIGASI === */
+.navbar {
+    background-color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* === 3. TATA LETAK KONTEN UTAMA === */
+.main-content {
+    padding-top: 100px;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 1;
+}
+
+/* === 4. KARTU KONTEN (Untuk Login, Cuaca, dll.) === */
+.content-card, .weather-card {
+    background-color: white;
+    padding: 2.5em 3em;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    width: 90%;
+    margin: 1rem;
+}
+
+/* === 5. ELEMEN UMUM DI DALAM KARTU === */
+h1 {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 0.5em;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #3498db;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* === 6. TATA LETAK & GAYA HALAMAN KUIS === */
+.quiz-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 1rem;
+}
+
+.quiz-main {
+    flex: 2;
+}
+
+.leaderboard-sidebar {
+    flex: 1;
+    position: sticky;
+    top: 100px;
+}
+
+.quiz-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2em;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 1.5em 1em;
+    font-size: 1rem;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    border: 2px solid transparent;
+}
+
+.option-btn:hover {
+    border-color: #3498db;
+    background-color: #e1f0fa;
+}
+
+.quiz-actions {
+    margin-top: 2em;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.skip-btn { background-color: #7f8c8d; }
+.skip-btn:hover { background-color: #95a5a6; }
+.finish-btn { background-color: #e74c3c; }
+.finish-btn:hover { background-color: #c0392b; }
+
+/* === 7. GAYA PAPAN PERINGKAT === */
+.leaderboard-list {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+.leaderboard-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+.player-name { font-weight: 500; }
+.player-score { font-weight: bold; color: #3498db; }
+.see-more-link { display: block; margin-top: 1.5em; font-weight: bold; color: #3498db; text-decoration: none; }
+
+.leaderboard-table {
+    width: 100%;
+    margin-top: 2em;
+    border-collapse: collapse;
+}
+.leaderboard-table th, .leaderboard-table td { padding: 12px 15px; border: 1px solid #ddd; }
+.leaderboard-table th { background-color: #f2f2f2; }
+
+/* === 8. GAYA LAIN-LAIN (FORM, FLASH) === */
+.alert-flash { padding: 1rem; margin-bottom: 1rem; border-radius: 5px; color: white; font-weight: bold; }
+.alert-flash.success { background-color: #2ecc71; }
+.alert-flash.error { background-color: #e74c3c; }
+
+.form-group { text-align: left; margin-bottom: 1rem; }
+.form-group input { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-top: 0.5em; }
+
+/* === 9. GAYA KHUSUS HALAMAN CUACA === */
+.weather-form input {
+    padding: 10px;
+    width: calc(100% - 120px);
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.weather-form .btn {
+    width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.weather-table {
+    width: 100%;
+    margin-top: 2em;
+    border-collapse: collapse;
+}
+.weather-table th, .weather-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.weather-table th {
+    background-color: #f2f2f2;
+}
+.weather-icon {
+    font-size: 2em;
+    vertical-align: middle;
+}
+
+/* === 10. GAYA FOOTER === */
+.site-footer {
+    background-color: #2c3e50;
+    color: #bdc3c7;
+    padding: 3rem 2rem 1rem;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    text-align: left;
+    flex-wrap: wrap;
+}
+.footer-column {
+    flex: 1;
+    min-width: 250px;
+}
+.footer-column h3 {
+    color: #ecf0f1;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+.footer-column.links ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-column.links ul li {
+    margin-bottom: 0.5rem;
+}
+.footer-column.links ul a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.footer-column.links ul a:hover {
+    color: #3498db;
+}
+.footer-copyright {
+    text-align: center;
+    border-top: 1px solid #34495e;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+}
+
+/* === 11. MEDIA QUERIES RESPONSIF (DENGAN PERBAIKAN) === */
+@media (max-width: 992px) {
+    .quiz-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .quiz-main, .leaderboard-sidebar {
+        flex: none;
+        width: 100%;
+        max-width: 700px;
+    }
+    .leaderboard-sidebar {
+        position: static;
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 14px; }
+
+    /* Perbaikan Navbar untuk Mobile */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.75rem 1rem;
+    }
+    .navbar-brand {
+        margin-bottom: 0.5rem;
+    }
+    .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        align-items: flex-start;
+    }
+    /* Perbaikan Padding Konten Utama */
+    .main-content {
+        padding-top: 180px; /* Nilai diperbesar untuk memberi lebih banyak ruang */
+    }
+
+    .quiz-options-grid {
+        grid-template-columns: 1fr;
+    }
+    .weather-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .weather-form input,
+    .weather-form .btn {
+        width: 100%;
+        margin: 0;
+    }
+
+    .content-card, .weather-card { padding: 1.5em 1.5em; }
+    .footer-container { flex-direction: column; }
+}
+
