@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Weather Forecast{% endblock %}
+
+{% block content %}
+<!-- MAIN CARD -->
+    <div class="weather-card">
+
+        <!-- QUIZ -->
+        <div class="start-quiz-section" style="margin: 2em 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 1.5em 0;">
+            <h2 style="margin-bottom: 0.5em;">Ready for a Challenge?</h2>
+            <p style="margin-bottom: 1.5em;">Test your Deep Learning knowledge and climb the leaderboard!</p>
+            
+            {% if session['logged_in'] %}
+                <a href="{{ url_for('quiz') }}" class="btn">Start Quiz</a>
+            {% else %}
+                <a href="{{ url_for('login_process') }}" class="btn">Login to Start Quiz</a>
+            {% endif %}
+        </div>
+
+        <!-- WEATHER -->
+        <h1>Weather Forecast</h1>
+        <form method="POST" action="/" class="weather-form">
+            <input type="text" name="city" placeholder="E.g., Bogor" required>
+            <button type="submit" class="btn">Search</button>
+        </form>
+
+        {% if error %}
+            <div class="alert" style="color: red; margin-top: 1em;">{{ error }}</div>
+        {% endif %}
+
+        {% if weather %}
+            <h2 style="margin-top: 1.5em;">Forecast for {{ weather.city }}</h2>
+            <table class="weather-table">
+                <thead>
+                    <tr>
+                        <th>Day & Date</th>
+                        <th>Day</th>
+                        <th>Night</th>
+                        <th>Condition</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for day in weather.forecast %}
+                    <tr>
+                        <td>
+                            <strong>{{ day.day_of_week }}</strong><br>
+                            <small>{{ day.date }}</small>
+                        </td>
+                        <td>{{ day.day_temp }}°C</td>
+                        <td>{{ day.night_temp }}°C</td>
+                        <td>
+                            <span class="weather-icon">{{ day.ikon }}</span>
+                            {{ day.description }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}
+

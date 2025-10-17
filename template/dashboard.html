@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="content-card">
+        <h1>Welcome, {{ session.username }}!</h1>
+        <a href="{{ url_for('quiz') }}" class="btn">START QUIZ</a>
+    </div>
+{% endblock %}

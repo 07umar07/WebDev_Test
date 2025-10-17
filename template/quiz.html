@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Play Quiz{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <!-- Quiz Board -->
+    <div class="content-card quiz-main">
+        <div style="text-align: right; font-size: 1.2rem;">
+            Your Score: <strong style="font-size: 1.5rem;">{{ score }}</strong>
+        </div>
+        <hr style="margin: 1em 0;">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert-flash {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h2 style="margin: 1.5em 0;">{{ question.question }}</h2>
+
+        <form method="POST" action="{{ url_for('quiz') }}">
+            <input type="hidden" name="question_id" value="{{ question.id }}">
+            <div class="quiz-options-grid">
+                {% for option in question.options %}
+                    <button type="submit" name="user_answer" value="{{ option }}" class="btn option-btn">
+                        {{ option }}
+                    </button>
+                {% endfor %}
+            </div>
+        </form>
+        
+        <div class="quiz-actions">
+            <a href="{{ url_for('quiz') }}" class="btn skip-btn">Skip Question</a>
+            <a href="{{ url_for('finish_quiz') }}" class="btn finish-btn">Finish Quiz</a>
+        </div>
+    </div>
+
+    <!-- Mini Leaderboard -->
+    <div class="content-card leaderboard-sidebar">
+        <h2>Top 5 Players</h2>
+        <ol class="leaderboard-list">
+            {% for user in leaderboard %}
+            <li>
+                <span class="player-name">{{ user.username }}</span>
+                <span class="player-score">{{ user.quiz_score }} pts</span>
+            </li>
+            {% endfor %}
+        </ol>
+        <a href="{{ url_for('leaderboard') }}" class="see-more-link">View Full Leaderboard &rarr;</a>
+    </div>
+</div>
+{% endblock %}
+

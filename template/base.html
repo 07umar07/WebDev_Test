@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Machine Learning QUIZ{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="{{ url_for('home') }}" class="navbar-brand">All About Machine Learning🧠⚙️🔁</a>
+        <nav>
+            <ul class="nav-links">
+                {% if session['logged_in'] %}
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('registration') }}">Register</a></li>
+                    <li><a href="{{ url_for('dashboard') }}">Quiz</a></li>
+                    <li><a href="{{ url_for('leaderboard') }}">Leaderboard</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    <li><a href="{{ url_for('login_process') }}">Login</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('login_process') }}">Login</a></li>
+                    <li><a href="{{ url_for('registration') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Machine Learning Quiz Application. Made with Flask by Umar Abdul Hakim Robbani.</p>
+        <p>Umar Abdul Hakim Robbani, Machine Learning and Software Development Enthusiast</p>
+    </footer>
+
+</body>
+</html>
